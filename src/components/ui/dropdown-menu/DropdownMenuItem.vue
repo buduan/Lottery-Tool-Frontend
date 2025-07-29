@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<DropdownMenuItemProps & {
   inset?: boolean
   variant?: 'default' | 'destructive'
 }>(), {
-  variant: 'default',
+  variant: 'default'
 })
 
 const delegatedProps = reactiveOmit(props, 'inset', 'variant', 'class')

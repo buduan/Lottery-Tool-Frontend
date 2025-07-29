@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-vue-next'
 import {
   DropdownMenuSubTrigger,
   type DropdownMenuSubTriggerProps,
-  useForwardProps,
+  useForwardProps
 } from 'reka-ui'
 import { cn } from '@/lib/utils'
 

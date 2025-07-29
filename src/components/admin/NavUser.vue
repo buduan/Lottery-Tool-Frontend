@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import {
   BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
-  Sparkles,
+  Sparkles
 } from 'lucide-vue-next'
 
 import {
   Avatar,
   AvatarFallback,
-  AvatarImage,
-} from './ui/avatar'
+  AvatarImage
+} from '../ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,21 +18,23 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+  DropdownMenuTrigger
+} from '../ui/dropdown-menu'
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
-} from './ui/sidebar'
+  useSidebar
+} from '../ui/sidebar'
 
-const props = defineProps<{
-  user: {
-    name: string
-    email: string
-    avatar: string
-  }
+interface User {
+  name: string
+  email: string
+  avatar: string
+}
+
+defineProps<{
+  user: User
 }>()
 
 const { isMobile } = useSidebar()
@@ -94,14 +94,6 @@ const { isMobile } = useSidebar()
             <DropdownMenuItem>
               <BadgeCheck />
               Account
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <CreditCard />
-              Billing
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Bell />
-              Notifications
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

@@ -5,11 +5,11 @@ import { TooltipArrow, TooltipContent, type TooltipContentEmits, type TooltipCon
 import { cn } from '@/lib/utils'
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: false
 })
 
 const props = withDefaults(defineProps<TooltipContentProps & { class?: HTMLAttributes['class'] }>(), {
-  sideOffset: 4,
+  sideOffset: 4
 })
 
 const emits = defineEmits<TooltipContentEmits>()

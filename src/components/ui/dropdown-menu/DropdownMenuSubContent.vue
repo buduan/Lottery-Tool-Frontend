@@ -5,7 +5,7 @@ import {
   DropdownMenuSubContent,
   type DropdownMenuSubContentEmits,
   type DropdownMenuSubContentProps,
-  useForwardPropsEmits,
+  useForwardPropsEmits
 } from 'reka-ui'
 import { cn } from '@/lib/utils'
 

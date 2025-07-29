@@ -7,7 +7,7 @@ import {
   DropdownMenuRadioItem,
   type DropdownMenuRadioItemEmits,
   type DropdownMenuRadioItemProps,
-  useForwardPropsEmits,
+  useForwardPropsEmits
 } from 'reka-ui'
 import { cn } from '@/lib/utils'
 

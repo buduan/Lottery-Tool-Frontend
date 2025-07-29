@@ -7,7 +7,7 @@ import {
   type DropdownMenuCheckboxItemEmits,
   type DropdownMenuCheckboxItemProps,
   DropdownMenuItemIndicator,
-  useForwardPropsEmits,
+  useForwardPropsEmits
 } from 'reka-ui'
 import { cn } from '@/lib/utils'
 

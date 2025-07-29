@@ -14,7 +14,7 @@ export interface SidebarMenuButtonProps extends PrimitiveProps {
 const props = withDefaults(defineProps<SidebarMenuButtonProps>(), {
   as: 'button',
   variant: 'default',
-  size: 'default',
+  size: 'default'
 })
 </script>
 

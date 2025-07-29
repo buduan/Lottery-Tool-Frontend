@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'vue'
 import { reactiveOmit } from '@vueuse/core'
 import {
   DropdownMenuSeparator,
-  type DropdownMenuSeparatorProps,
+  type DropdownMenuSeparatorProps
 } from 'reka-ui'
 import { cn } from '@/lib/utils'
 
