@@ -191,3 +191,12 @@ export interface LotteryRecordListParams extends PaginationParams {
   start_date?: string;
   end_date?: string;
 }
+
+// i18n 相关类型
+export type Locale = 'en-US' | 'zh-CN';
+
+export interface I18nConfig {
+  locale: Locale;
+  fallbackLocale: Locale;
+  messages: Record<Locale, Record<string, string | Record<string, string>>>;
+}
