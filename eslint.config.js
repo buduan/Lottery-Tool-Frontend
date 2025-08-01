@@ -1,7 +1,7 @@
-import pluginVue from 'eslint-plugin-vue'
-import vueParser from 'vue-eslint-parser'
-import tsParser from '@typescript-eslint/parser'
-import tsPlugin from '@typescript-eslint/eslint-plugin'
+import pluginVue from 'eslint-plugin-vue';
+import vueParser from 'vue-eslint-parser';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
   {
@@ -37,7 +37,7 @@ export default [
       'vue/multi-word-component-names': 'off',
       'vue/no-reserved-props': 'off', // 允许 shadcn-vue 组件使用 class props
       'vue/no-multiple-template-root': 'off', // Vue 3 支持多个根节点
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', }],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-empty-object-type': 'off', // 允许空对象类型
       '@typescript-eslint/no-explicit-any': 'warn', // 降级为警告
       'no-console': 'warn',
@@ -70,7 +70,7 @@ export default [
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', }],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'warn',
       'indent': ['error', 2],
       'quotes': ['error', 'single'],
@@ -109,4 +109,4 @@ export default [
       'array-bracket-spacing': ['error', 'never'],
     },
   },
-]
+];

@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import type { SidebarProps } from './ui/sidebar'
+import type { SidebarProps } from './ui/sidebar';
 
 
 import {
   Home,
   Activity,
   User,
-  Settings
-} from 'lucide-vue-next'
-import NavMain from '@/components/NavMain.vue'
-import NavUser from '@/components/NavUser.vue'
+  Settings,
+} from 'lucide-vue-next';
+import NavMain from '@/components/NavMain.vue';
+import NavUser from '@/components/NavUser.vue';
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarRail
-} from './ui/sidebar'
+  SidebarRail,
+} from './ui/sidebar';
 
 const props = withDefaults(defineProps<SidebarProps>(), {
-  collapsible: 'icon'
-})
+  collapsible: 'icon',
+});
 
 // This is sample data.
 const data = {
@@ -36,13 +36,13 @@ const data = {
       items: [
         {
           title: 'Overview',
-          url: '/admin/'
+          url: '/admin/',
         },
         {
           title: 'Lottery Page',
-          url: '/'
-        }
-      ]
+          url: '/',
+        },
+      ],
     },
     {
       title: 'Activities',
@@ -51,12 +51,12 @@ const data = {
       items: [
         {
           title: 'List',
-          url: '/admin/activity'
+          url: '/admin/activity',
         },
         {
           title: 'Create',
-          url: '/admin/activity/create'
-        }
+          url: '/admin/activity/create',
+        },
       ],
     },
     {
@@ -66,12 +66,12 @@ const data = {
       items: [
         {
           title: 'List',
-          url: '/admin/user'
+          url: '/admin/user',
         },
         {
           title: 'Create',
-          url: '/admin/user/create'
-        }
+          url: '/admin/user/create',
+        },
       ],
     },
     {
@@ -81,16 +81,16 @@ const data = {
       items: [
         {
           title: 'Profile',
-          url: '/admin/settings/profile'
+          url: '/admin/settings/profile',
         },
         {
           title: 'Password',
-          url: '/admin/settings/password'
-        }
+          url: '/admin/settings/password',
+        },
       ],
     },
   ],
-}
+};
 </script>
 
 <template>

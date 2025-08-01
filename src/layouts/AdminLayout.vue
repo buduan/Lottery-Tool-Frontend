@@ -1,12 +1,12 @@
 <script lang="ts">
 export const description
-  = 'A sidebar that collapses to icons.'
-export const iframeHeight = '800px'
-export const containerClass = 'w-full h-full'
+  = 'A sidebar that collapses to icons.';
+export const iframeHeight = '800px';
+export const containerClass = 'w-full h-full';
 </script>
 
 <script setup lang="ts">
-import AppSidebar from '../components/AppSidebar.vue'
+import AppSidebar from '../components/AppSidebar.vue';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,13 +14,13 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '../components/ui/Breadcrumb'
-import { Separator } from '../components/ui/Separator'
+} from '../components/ui/Breadcrumb';
+import { Separator } from '../components/ui/Separator';
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '../components/ui/sidebar'
+} from '../components/ui/sidebar';
 </script>
 
 <template>

@@ -6,13 +6,13 @@ import {
   CreditCard,
   LogOut,
   Sparkles,
-} from 'lucide-vue-next'
+} from 'lucide-vue-next';
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from './ui/avatar'
+} from './ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,22 +21,22 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+} from './ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from './ui/sidebar'
+} from './ui/sidebar';
 
 const props = defineProps<{
   user: {
     name: string
     email: string
   }
-}>()
+}>();
 
-const { isMobile } = useSidebar()
+const { isMobile } = useSidebar();
 </script>
 
 <template>
