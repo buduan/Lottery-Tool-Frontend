@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import type { SidebarProps } from './ui/sidebar';
 
-
 import {
-  Home,
-  Activity,
-  User,
-  Settings,
+  AudioWaveform,
+  BookOpen,
+  Bot,
+  Command,
+  Frame,
+  GalleryVerticalEnd,
+  Map,
+  PieChart,
+  Settings2,
+  SquareTerminal,
 } from 'lucide-vue-next';
 import NavMain from '@/components/NavMain.vue';
+import NavProjects from '@/components/NavProjects.vue';
 import NavUser from '@/components/NavUser.vue';
+import TeamSwitcher from '@/components/TeamSwitcher.vue';
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarHeader,
   SidebarRail,
 } from './ui/sidebar';
 
@@ -27,67 +35,127 @@ const data = {
   user: {
     name: 'shadcn',
     email: 'm@example.com',
+    avatar: '/avatars/shadcn.jpg',
   },
+  teams: [
+    {
+      name: 'Acme Inc',
+      logo: GalleryVerticalEnd,
+      plan: 'Enterprise',
+    },
+    {
+      name: 'Acme Corp.',
+      logo: AudioWaveform,
+      plan: 'Startup',
+    },
+    {
+      name: 'Evil Corp.',
+      logo: Command,
+      plan: 'Free',
+    },
+  ],
   navMain: [
     {
-      title: 'Home',
-      url: '/admin',
-      icon: Home,
+      title: 'Playground',
+      url: '#',
+      icon: SquareTerminal,
+      isActive: true,
       items: [
         {
-          title: 'Overview',
-          url: '/admin/',
+          title: 'History',
+          url: '#',
         },
         {
-          title: 'Lottery Page',
-          url: '/',
+          title: 'Starred',
+          url: '#',
+        },
+        {
+          title: 'Settings',
+          url: '#',
         },
       ],
     },
     {
-      title: 'Activities',
-      url: '/admin/activity',
-      icon: Activity,
+      title: 'Models',
+      url: '#',
+      icon: Bot,
       items: [
         {
-          title: 'List',
-          url: '/admin/activity',
+          title: 'Genesis',
+          url: '#',
         },
         {
-          title: 'Create',
-          url: '/admin/activity/create',
+          title: 'Explorer',
+          url: '#',
+        },
+        {
+          title: 'Quantum',
+          url: '#',
         },
       ],
     },
     {
-      title: 'Users',
-      url: '/admin/user',
-      icon: User,
+      title: 'Documentation',
+      url: '#',
+      icon: BookOpen,
       items: [
         {
-          title: 'List',
-          url: '/admin/user',
+          title: 'Introduction',
+          url: '#',
         },
         {
-          title: 'Create',
-          url: '/admin/user/create',
+          title: 'Get Started',
+          url: '#',
+        },
+        {
+          title: 'Tutorials',
+          url: '#',
+        },
+        {
+          title: 'Changelog',
+          url: '#',
         },
       ],
     },
     {
       title: 'Settings',
-      url: '/admin/settings',
-      icon: Settings,
+      url: '#',
+      icon: Settings2,
       items: [
         {
-          title: 'Profile',
-          url: '/admin/settings/profile',
+          title: 'General',
+          url: '#',
         },
         {
-          title: 'Password',
-          url: '/admin/settings/password',
+          title: 'Team',
+          url: '#',
+        },
+        {
+          title: 'Billing',
+          url: '#',
+        },
+        {
+          title: 'Limits',
+          url: '#',
         },
       ],
+    },
+  ],
+  projects: [
+    {
+      name: 'Design Engineering',
+      url: '#',
+      icon: Frame,
+    },
+    {
+      name: 'Sales & Marketing',
+      url: '#',
+      icon: PieChart,
+    },
+    {
+      name: 'Travel',
+      url: '#',
+      icon: Map,
     },
   ],
 };
@@ -95,8 +163,12 @@ const data = {
 
 <template>
   <Sidebar v-bind="props">
+    <SidebarHeader>
+      <TeamSwitcher :teams="data.teams" />
+    </SidebarHeader>
     <SidebarContent>
       <NavMain :items="data.navMain" />
+      <NavProjects :projects="data.projects" />
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="data.user" />

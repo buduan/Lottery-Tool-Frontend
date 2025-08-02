@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 interface UserState {
   token: string | null
@@ -10,11 +10,11 @@ export const useUserStore = defineStore('user', {
   }),
   actions: {
     setToken(token: string) {
-      this.token = token
+      this.token = token;
     },
     clearToken() {
-      this.token = null
+      this.token = null;
     },
   },
   persist: true,
-})
+});
