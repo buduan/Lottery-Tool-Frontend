@@ -73,7 +73,7 @@ const { isMobile } = useSidebar();
               <Avatar class="h-8 w-8 rounded-lg">
                 <AvatarImage :src="user.avatar" :alt="user.name" />
                 <AvatarFallback class="rounded-lg">
-                  CN
+                  {{ user.name.slice(0, 1).toUpperCase() || 'CN' }}
                 </AvatarFallback>
               </Avatar>
               <div class="grid flex-1 text-left text-sm leading-tight">

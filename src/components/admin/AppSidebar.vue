@@ -1,25 +1,44 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import type { SidebarProps } from '../ui/sidebar';
 import NavMain from '@/components/admin/NavMain.vue';
 import NavUser from '@/components/admin/NavUser.vue';
-import { Bot, Sparkles, Settings2 } from 'lucide-vue-next';
-
+import { Bot, Sparkles, Settings2, Users } from 'lucide-vue-next';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarRail,
 } from '../ui/sidebar';
+import { authApi } from '@/api';
 
-const props = withDefaults(defineProps<SidebarProps>(), {
-  collapsible: 'icon',
-});
+// 用户信息类型
+interface User {
+  name: string;
+  email: string;
+  avatar: string;
+}
 
-const data = {
+// 导航栏项类型
+interface NavMainItem {
+  title: string;
+  url: string;
+  icon?: any;
+  items?: Array<{
+    title: string;
+    url: string;
+  }>;
+}
+
+// 初始化侧边栏数据
+const data = ref<{
+  user: User;
+  navMain: Array<NavMainItem>;
+}>({
   user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: '',
+    email: '',
+    avatar: '',
   },
   navMain: [
     {
@@ -29,8 +48,33 @@ const data = {
     },
     {
       title: 'Activities',
-      url: '#',
+      url: '/admin/activities/list',
       icon: Sparkles,
+      items: [
+        {
+          title: 'All',
+          url: '/admin/activities/list',
+        },
+        {
+          title: 'Create',
+          url: '/admin/activities/create',
+        },
+      ],
+    },
+    {
+      title: 'Users',
+      url: '/admin/users',
+      icon: Users,
+      items: [
+        {
+          title: 'List',
+          url: '/admin/users/list',
+        },
+        {
+          title: 'Add',
+          url: '/admin/users/create',
+        },
+      ],
     },
     {
       title: 'Settings',
@@ -42,21 +86,26 @@ const data = {
           url: '#',
         },
         {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
+          title: 'Super',
           url: '#',
         },
       ],
     },
   ],
-};
+});
+
+onMounted(async () => {
+  const response = await authApi.me();
+  data.value.user = {
+    name: response.user.username,
+    email: response.user.email,
+    avatar: '',
+  };
+});
+
+const props = withDefaults(defineProps<SidebarProps>(), {
+  collapsible: 'icon',
+});
 </script>
 
 <template>
