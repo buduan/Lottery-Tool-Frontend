@@ -11,12 +11,13 @@ const adminRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'Admin',
+        name: 'Dashboard',
         component: () => import('../views/admin/Dashboard.vue'),
         meta: {
-          title: '管理后台',
+          title: 'Dashboard',
         },
       },
+
     ],
   },
 ];
