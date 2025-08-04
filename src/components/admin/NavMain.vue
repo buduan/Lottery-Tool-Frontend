@@ -38,13 +38,14 @@ const props = defineProps<{
           :key="`collapsible-${item.title}`"
           v-if="item.items"
           :default-open="true"
+          class="group"
         >
           <SidebarMenuItem>
             <CollapsibleTrigger as-child>
               <SidebarMenuButton :tooltip="item.title">
                 <component :is="item.icon" v-if="item.icon" />
                 <span>{{ item.title }}</span>
-                <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                <ChevronRight class="ml-auto transition-transform duration-200 group-data-[state=open]:rotate-90" />
               </SidebarMenuButton>
             </CollapsibleTrigger>
           </SidebarMenuItem>

@@ -2,7 +2,7 @@
 import type { SidebarProps } from '../ui/sidebar'
 import NavMain from '@/components/admin/NavMain.vue'
 import NavUser from '@/components/admin/NavUser.vue'
-import { Bot, BookOpen, Settings2 } from 'lucide-vue-next'
+import { Bot, Sparkles, Settings2 } from 'lucide-vue-next'
 
 import {
   Sidebar,
@@ -26,19 +26,11 @@ const data = {
       title: 'Dashboard',
       url: '/admin',
       icon: Bot,
-      items: [
-        {
-          title: 'Overview',
-          url: '/admin/'
-        }
-      ]
     },
     {
-      title: 'Documentation',
+      title: 'Activities',
       url: '#',
-      icon: BookOpen,
-      items: [
-      ]
+      icon: Sparkles,
     },
     {
       title: 'Settings',
