@@ -1,10 +1,10 @@
-import { Bot, Calendar, User, Cog } from 'lucide-vue-next'
+import { Bot, Calendar, User, Cog } from 'lucide-vue-next';
 
 export const NAVBAR = [
   {
     title: 'Dashboard',
     url: '/admin',
-    icon: Bot
+    icon: Bot,
   },
   {
     title: 'Activities',
@@ -13,13 +13,13 @@ export const NAVBAR = [
     items: [
       {
         title: 'Overview',
-        url: '/admin/activities'
+        url: '/admin/activities',
       },
       {
         title: 'Create',
-        url: '/admin/activities/create'
-      }
-    ]
+        url: '/admin/activities/create',
+      },
+    ],
   },
   {
     title: 'Users',
@@ -28,17 +28,17 @@ export const NAVBAR = [
     items: [
       {
         title: 'Overview',
-        url: '/admin/users'
+        url: '/admin/users',
       },
       {
         title: 'Create',
-        url: '/admin/users/create'
-      }
-    ]
+        url: '/admin/users/create',
+      },
+    ],
   },
   {
     title: 'Settings',
     url: '/admin/settings',
-    icon: Cog
-  }
-]
+    icon: Cog,
+  },
+];

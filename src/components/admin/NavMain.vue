@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ChevronRight } from 'lucide-vue-next'
+import { ChevronRight } from 'lucide-vue-next';
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
-} from '../ui/collapsible'
+  CollapsibleTrigger,
+} from '../ui/collapsible';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -13,8 +13,8 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem
-} from '../ui/sidebar'
+  SidebarMenuSubItem,
+} from '../ui/sidebar';
 
 const props = defineProps<{
   items?: Array<{
@@ -26,7 +26,7 @@ const props = defineProps<{
       url: string
     }>
   }>
-}>()
+}>();
 </script>
 
 <template>

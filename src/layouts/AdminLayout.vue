@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import AppSidebar from '@/components/admin/AppSidebar.vue'
+import AppSidebar from '@/components/admin/AppSidebar.vue';
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger
-} from '@/components/ui/sidebar'
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
 import { 
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
-import { Separator } from '@/components/ui/separator'
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { Separator } from '@/components/ui/separator';
 </script>
 
 <template>

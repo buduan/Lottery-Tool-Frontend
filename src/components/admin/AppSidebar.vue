@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { SidebarProps } from '../ui/sidebar'
-import NavMain from '@/components/admin/NavMain.vue'
-import NavUser from '@/components/admin/NavUser.vue'
-import { Bot, Sparkles, Settings2 } from 'lucide-vue-next'
+import type { SidebarProps } from '../ui/sidebar';
+import NavMain from '@/components/admin/NavMain.vue';
+import NavUser from '@/components/admin/NavUser.vue';
+import { Bot, Sparkles, Settings2 } from 'lucide-vue-next';
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarRail
-} from '../ui/sidebar'
+  SidebarRail,
+} from '../ui/sidebar';
 
 const props = withDefaults(defineProps<SidebarProps>(), {
-  collapsible: 'icon'
-})
+  collapsible: 'icon',
+});
 
 const data = {
   user: {
     name: 'shadcn',
     email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg'
+    avatar: '/avatars/shadcn.jpg',
   },
   navMain: [
     {
@@ -39,24 +39,24 @@ const data = {
       items: [
         {
           title: 'General',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Team',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Billing',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Limits',
-          url: '#'
-        }
-      ]
-    }
-  ]
-}
+          url: '#',
+        },
+      ],
+    },
+  ],
+};
 </script>
 
 <template>

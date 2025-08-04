@@ -3,14 +3,14 @@ import {
   BadgeCheck,
   ChevronsUpDown,
   LogOut,
-  Sparkles
-} from 'lucide-vue-next'
+  Sparkles,
+} from 'lucide-vue-next';
 
 import {
   Avatar,
   AvatarFallback,
-  AvatarImage
-} from '../ui/avatar'
+  AvatarImage,
+} from '../ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,14 +18,14 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '../ui/dropdown-menu'
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar
-} from '../ui/sidebar'
+  useSidebar,
+} from '../ui/sidebar';
 
 interface User {
   name: string
@@ -35,9 +35,9 @@ interface User {
 
 defineProps<{
   user: User
-}>()
+}>();
 
-const { isMobile } = useSidebar()
+const { isMobile } = useSidebar();
 </script>
 
 <template>
