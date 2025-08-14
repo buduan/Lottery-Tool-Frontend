@@ -11,31 +11,10 @@ import {
 } from '@/components/ui/breadcrumb';
 
 type Crumb = { name: string; path?: string };
-type CrumbBuilder = (args: { route: ReturnType<typeof useRoute> }) => Crumb[];
 
 const route = useRoute();
 
 const crumbs = computed<Crumb[]>(() => {
-  const metaCrumbs = route.meta?.breadcrumb as
-    | Crumb[]
-    | CrumbBuilder
-    | undefined;
-  if (typeof metaCrumbs === 'function') {
-    const list = (metaCrumbs as CrumbBuilder)({ route });
-    return list.map((c, i) => ({
-      ...c,
-      path: i === list.length - 1 ? undefined : c.path,
-    }));
-  }
-  if (Array.isArray(metaCrumbs) && metaCrumbs.length) {
-    // Ensure last item has no link
-    return metaCrumbs.map((c, i) => ({
-      ...c,
-      path: i === metaCrumbs.length - 1 ? undefined : c.path,
-    }));
-  }
-
-  // Fallback: build from matched routes using title/name and cumulative paths
   const built: Crumb[] = [];
   let acc = '';
   for (const m of route.matched) {
