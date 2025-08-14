@@ -5,7 +5,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import Breadcrumbs from '@/components/ui/breadcrumb/Breadcrumbs.vue';
+import Breadcrumbs from '@/components/navigation/Breadcrumbs.vue';
 import { Separator } from '@/components/ui/separator';
 </script>
 

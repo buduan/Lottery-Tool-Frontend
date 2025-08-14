@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import Breadcrumbs from '@/components/ui/breadcrumb/Breadcrumbs.vue';
+import Breadcrumbs from '@/components/navigation/Breadcrumbs.vue';
 </script>
 
 <style scoped></style>
