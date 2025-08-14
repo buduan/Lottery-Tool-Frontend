@@ -10,6 +10,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/Home.vue'),
     meta: {
       title: '首页',
+      breadcrumb: [{ name: '首页', path: '/' }],
     },
   },
   {
@@ -18,6 +19,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/About.vue'),
     meta: {
       title: '关于',
+      breadcrumb: [
+        { name: '首页', path: '/' },
+        { name: '关于', path: '/about' },
+      ],
     },
   },
   // 管理员路由

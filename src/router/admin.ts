@@ -7,6 +7,10 @@ const adminRoutes: RouteRecordRaw[] = [
     component: () => import('../layouts/AdminLayout.vue'),
     meta: {
       requiresAuth: true,
+      breadcrumb: [
+        { name: '首页', path: '/' },
+        { name: '管理后台', path: '/admin' },
+      ],
     },
     children: [
       {
@@ -15,9 +19,13 @@ const adminRoutes: RouteRecordRaw[] = [
         component: () => import('../views/admin/Dashboard.vue'),
         meta: {
           title: 'Dashboard',
+          breadcrumb: [
+            { name: '首页', path: '/' },
+            { name: '管理后台', path: '/admin' },
+            { name: '仪表盘', path: '/admin' },
+          ],
         },
       },
-
     ],
   },
 ];
