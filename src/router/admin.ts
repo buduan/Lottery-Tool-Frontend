@@ -7,6 +7,7 @@ const adminRoutes: RouteRecordRaw[] = [
     component: () => import('../layouts/AdminLayout.vue'),
     meta: {
       requiresAuth: true,
+      title: '管理后台',
     },
     children: [
       {
@@ -17,7 +18,6 @@ const adminRoutes: RouteRecordRaw[] = [
           title: 'Dashboard',
         },
       },
-
     ],
   },
 ];
