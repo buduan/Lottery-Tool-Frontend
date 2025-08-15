@@ -33,7 +33,9 @@ const onSubmit = (e: Event) => {
                 <TooltipTrigger as-child>
                   <a href="#" class="underline underline-offset-4">
                     Sign up
-                  </a>
+                  <button type="button" class="underline underline-offset-4">
+                    Sign up
+                  </button>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Registration not supported yet</p>
