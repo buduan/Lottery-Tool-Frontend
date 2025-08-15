@@ -1,7 +1,9 @@
 <script setup lang="ts">
-// App 根组件
+import { Toaster } from '@/components/ui/sonner'
+import 'vue-sonner/style.css' 
 </script>
 
 <template>
+  <Toaster />
   <router-view />
 </template>

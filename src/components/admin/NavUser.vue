@@ -1,45 +1,3 @@
-<script setup lang="ts">
-import {
-  BadgeCheck,
-  ChevronsUpDown,
-  LogOut,
-  Sparkles,
-} from 'lucide-vue-next';
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '../ui/avatar';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from '../ui/sidebar';
-
-interface User {
-  name: string
-  email: string
-  avatar: string
-}
-
-defineProps<{
-  user: User
-}>();
-
-const { isMobile } = useSidebar();
-</script>
-
 <template>
   <SidebarMenu>
     <SidebarMenuItem>
@@ -85,19 +43,12 @@ const { isMobile } = useSidebar();
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Sparkles />
-              Upgrade to Pro
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
               <BadgeCheck />
               Account
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem @click="handleLogout">
             <LogOut />
             Log out
           </DropdownMenuItem>
@@ -106,3 +57,56 @@ const { isMobile } = useSidebar();
     </SidebarMenuItem>
   </SidebarMenu>
 </template>
+
+<script setup lang="ts">
+import {
+  BadgeCheck,
+  ChevronsUpDown,
+  LogOut,
+} from 'lucide-vue-next';
+import { useUserStore } from '@/stores/user';
+import { toast } from 'vue-sonner';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const userStore = useUserStore()
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '../ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from '../ui/sidebar';
+
+interface User {
+  name: string
+  email: string
+  avatar: string
+}
+
+defineProps<{
+  user: User
+}>();
+
+const { isMobile } = useSidebar();
+
+const handleLogout = () => {
+  userStore.clearToken()
+  toast.success('You\'ve been logged out')
+  router.push({ name: 'Login' })
+}
+</script>
