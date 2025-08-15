@@ -104,7 +104,7 @@ defineProps<{
 
 const { isMobile } = useSidebar();
 
-const handleLogout = ()=>{
+const handleLogout = () => {
   userStore.clearToken()
   toast.success('You\'ve been logged out')
   router.push({ name: 'Login' })
