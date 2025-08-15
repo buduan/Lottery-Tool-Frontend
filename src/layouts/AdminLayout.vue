@@ -22,7 +22,9 @@ import { Separator } from '@/components/ui/separator';
           <Breadcrumbs />
         </div>
       </header>
-      <RouterView class="px-4 py-2" />
+      <div class="px-4 py-2">
+        <RouterView />
+      </div>
     </SidebarInset>
   </SidebarProvider>
 </template>
