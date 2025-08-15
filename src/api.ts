@@ -24,7 +24,7 @@ import type {
 } from './types/api';
 
 // API 基础配置
-const API_BASE_URL = process.env.NODE_ENV == 'development' ? 'http://localhost:3000/api' : '/api';
+const API_BASE_URL = 'http://lottery.ibuduan.com';
 
 // API 错误类
 export class ApiError extends Error {

@@ -20,6 +20,14 @@ const routes: RouteRecordRaw[] = [
       title: '关于',
     },
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/auth/login.vue'),
+    meta: {
+      title: '登录',
+    },
+  },
   // 管理员路由
   ...adminRoutes,
 ];
