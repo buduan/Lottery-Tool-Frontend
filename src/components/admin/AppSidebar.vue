@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import type { Component } from 'vue';
 import type { SidebarProps } from '../ui/sidebar';
 import NavMain from '@/components/admin/NavMain.vue';
 import NavUser from '@/components/admin/NavUser.vue';
@@ -17,13 +18,14 @@ interface User {
   name: string;
   email: string;
   avatar: string;
+  role: string;
 }
 
 // 导航栏项类型
 interface NavMainItem {
   title: string;
   url: string;
-  icon?: any;
+  icon?: Component;
   items?: Array<{
     title: string;
     url: string;
@@ -39,6 +41,7 @@ const data = ref<{
     name: '',
     email: '',
     avatar: '',
+    role: '',
   },
   navMain: [
     {
@@ -72,7 +75,7 @@ const data = ref<{
         },
         {
           title: 'Add',
-          url: '/admin/users/create',
+          url: '/admin/users/add',
         },
       ],
     },
@@ -83,11 +86,7 @@ const data = ref<{
       items: [
         {
           title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Super',
-          url: '#',
+          url: '/admin/settings',
         },
       ],
     },
@@ -100,7 +99,18 @@ onMounted(async () => {
     name: response.user.username,
     email: response.user.email,
     avatar: '',
+    role: response.user.role,
   };
+
+  if (data.value.user.role === 'super_admin') {
+    const settingsItem = data.value.navMain.find(
+      (item) => item.title === 'Settings'
+    );
+    settingsItem?.items?.push({
+      title: 'Super',
+      url: '/admin/super-settings',
+    });
+  }
 });
 
 const props = withDefaults(defineProps<SidebarProps>(), {
