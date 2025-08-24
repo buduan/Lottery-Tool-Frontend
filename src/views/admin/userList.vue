@@ -5,33 +5,33 @@
     <!-- 搜索和筛选区域 -->
     <div class="flex flex-col sm:flex-row gap-4">
       <div class="flex-1">
-        <input
+        <Input
           v-model="searchParams.search"
           type="text"
           placeholder="搜索用户名或邮箱..."
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="w-full"
           @input="handleSearch"
         />
       </div>
       <div class="flex gap-2">
-        <select
-          v-model="searchParams.role"
-          class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          @change="handleSearch"
-        >
-          <option value="">所有角色</option>
-          <option value="admin">管理员</option>
-          <option value="super_admin">超级管理员</option>
-        </select>
-        <select
-          v-model="searchParams.status"
-          class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          @change="handleSearch"
-        >
-          <option value="">所有状态</option>
-          <option value="active">活跃</option>
-          <option value="inactive">禁用</option>
-        </select>
+        <Select v-model="searchParams.role" @update:model-value="handleSearch">
+          <SelectTrigger class="w-[140px]">
+            <SelectValue placeholder="选择角色" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="admin">管理员</SelectItem>
+            <SelectItem value="super_admin">超级管理员</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select v-model="searchParams.status" @update:model-value="handleSearch">
+          <SelectTrigger class="w-[140px]">
+            <SelectValue placeholder="选择状态" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="active">活跃</SelectItem>
+            <SelectItem value="inactive">禁用</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
 
@@ -55,6 +55,14 @@ import type { User, UserListParams } from '@/types/api';
 import type { TableColumn } from '@/components/common/types';
 import PageTitle from '@/components/ui/text/pageTitle.vue';
 import DataTable from '@/components/common/DataTable.vue';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 // 路由实例
 const router = useRouter();
@@ -139,7 +147,7 @@ const columns: TableColumn[] = [
     title: '操作',
     width: '120px',
     render: (value: unknown, record: Record<string, unknown>) => {
-      const user = record as User;
+      const user = record as unknown as User;
       return `
         <div class="flex items-center gap-2">
           <button onclick="handleEditUser('${user.id}')" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 w-8" title="编辑用户">
