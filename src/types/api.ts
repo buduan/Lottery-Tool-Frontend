@@ -23,6 +23,8 @@ export interface Activity {
   };
   created_at: string;
   lottery_codes_count?: number;
+  remaining_lottery_codes?: number;
+  used_lottery_codes?: number;
   prizes?: Prize[];
 }
 

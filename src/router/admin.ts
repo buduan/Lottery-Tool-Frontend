@@ -47,6 +47,14 @@ const adminRoutes: RouteRecordRaw[] = [
               title: 'Create Activity',
             },
           },
+          {
+            path: 'data/:id',
+            name: 'Activity Data',
+            component: () => import('../views/admin/activityData.vue'),
+            meta: {
+              title: 'Activity Data',
+            },
+          },
         ],
       },
       {
