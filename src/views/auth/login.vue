@@ -7,33 +7,33 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute, useRouter } from 'vue-router'
-import LoginForm from '@/components/auth/loginForm.vue'
-import API, { setAuthToken } from '@/api'
-import { useUserStore } from '@/stores/user'
-import { toast } from 'vue-sonner'
+import { useRoute, useRouter } from 'vue-router';
+import LoginForm from '@/components/auth/loginForm.vue';
+import API, { setAuthToken } from '@/api';
+import { useUserStore } from '@/stores/user';
+import { toast } from 'vue-sonner';
 
-const route = useRoute()
-const router = useRouter()
-const userStore = useUserStore()
+const route = useRoute();
+const router = useRouter();
+const userStore = useUserStore();
 
 const handleLogin = async (values: { username: string; password: string }) => {
   try {
-    const { token } = await API.auth.login(values)
-    setAuthToken(token)
-    userStore.setToken(token)
+    const { token } = await API.auth.login(values);
+    setAuthToken(token);
+    userStore.setToken(token);
 
-    const backurlRaw = route.query.backurl
-    const backurl = Array.isArray(backurlRaw) ? backurlRaw[0] : backurlRaw
-    const decoded = backurl ? decodeURIComponent(backurl) : ''
+    const backurlRaw = route.query.backurl;
+    const backurl = Array.isArray(backurlRaw) ? backurlRaw[0] : backurlRaw;
+    const decoded = backurl ? decodeURIComponent(backurl) : '';
 
     if (decoded && decoded.startsWith('/')) {
-      await router.replace(decoded)
+      await router.replace(decoded);
     } else {
-      await router.replace({ name: 'Dashboard' })
+      await router.replace({ name: 'Dashboard' });
     }
   } catch (err) {
-    toast.error('登录失败，请检查用户名或密码', err)
+    toast.error('登录失败，请检查用户名或密码', err);
   }
-}
+};
 </script>

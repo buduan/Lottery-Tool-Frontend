@@ -68,8 +68,8 @@ import { useUserStore } from '@/stores/user';
 import { toast } from 'vue-sonner';
 import { useRouter } from 'vue-router';
 
-const router = useRouter()
-const userStore = useUserStore()
+const router = useRouter();
+const userStore = useUserStore();
 
 import {
   Avatar,
@@ -105,8 +105,8 @@ defineProps<{
 const { isMobile } = useSidebar();
 
 const handleLogout = () => {
-  userStore.clearToken()
-  toast.success('You\'ve been logged out')
-  router.push({ name: 'Login' })
-}
+  userStore.clearToken();
+  toast.success('You\'ve been logged out');
+  router.push({ name: 'Login' });
+};
 </script>

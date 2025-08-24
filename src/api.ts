@@ -27,8 +27,8 @@ import type {
 // 优先使用环境变量或全局变量，其次使用默认值
 const API_BASE_URL =
   (typeof process !== 'undefined' && process.env && process.env.API_BASE_URL) ? process.env.API_BASE_URL :
-  (typeof window !== 'undefined' && (window as any).API_BASE_URL) ? (window as any).API_BASE_URL :
-  'http://lottery.ibuduan.com';
+    (typeof window !== 'undefined' && (window as any).API_BASE_URL) ? (window as any).API_BASE_URL :
+      'http://lottery.ibuduan.com';
 
 // API 错误类
 export class ApiError extends Error {
