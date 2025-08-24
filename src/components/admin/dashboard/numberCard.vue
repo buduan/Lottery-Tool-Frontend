@@ -21,5 +21,5 @@ defineProps<{
   title: string
   value: number
   icon: Component | string
-}>()
+}>();
 </script>
