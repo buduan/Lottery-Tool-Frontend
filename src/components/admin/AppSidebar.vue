@@ -11,7 +11,7 @@ import {
   SidebarFooter,
   SidebarRail,
 } from '../ui/sidebar';
-import { authApi } from '@/api';
+import { API } from '@/api/index';
 
 // 用户信息类型
 interface User {
@@ -94,7 +94,7 @@ const data = ref<{
 });
 
 onMounted(async () => {
-  const response = await authApi.me();
+  const response = await API.auth.me();
   data.value.user = {
     name: response.user.username,
     email: response.user.email,

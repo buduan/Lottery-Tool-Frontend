@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, h } from 'vue';
 import { useRouter } from 'vue-router';
-import { systemApi } from '@/api';
+import { API } from '@/api/index';
 import type { User, UserListParams } from '@/types/api';
 import type { TableColumn } from '@/components/common/types';
 import PageTitle from '@/components/ui/text/pageTitle.vue';
@@ -169,7 +169,7 @@ const columns: TableColumn[] = [
 const fetchUsers = async () => {
   try {
     loading.value = true;
-    const response = await systemApi.getUsers(searchParams);
+    const response = await API.system.getUsers(searchParams);
     users.value = response.users;
     
     // 更新分页信息
@@ -202,7 +202,7 @@ const handlePageChange = (page: number) => {
 const handleStatusChange = async (userId: string, currentStatus: string) => {
   try {
     const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
-    await systemApi.updateUserStatus(Number(userId), newStatus);
+    await API.system.updateUser(Number(userId), { status: newStatus });
     
     // 更新本地数据
     const userIndex = users.value.findIndex(u => u.id === Number(userId));

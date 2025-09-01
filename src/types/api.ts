@@ -189,9 +189,150 @@ export interface LotteryCodeListParams extends SearchParams {
 }
 
 export interface LotteryRecordListParams extends PaginationParams {
+  activity_id?: number;
   is_winner?: boolean;
+  winner_only?: boolean;
   start_date?: string;
   end_date?: string;
+  participant_name?: string;
+  lottery_code?: string;
+}
+
+export interface ImportLotteryCodesRequest {
+  file: File;
+}
+
+export interface UpdateParticipantInfoRequest {
+  participant_info: {
+    name: string;
+    phone: string;
+    email?: string;
+  };
+}
+
+export interface OfflineDrawRequest {
+  lottery_code: string;
+  prize_id: number;
+}
+
+export interface ResetPasswordRequest {
+  new_password: string;
+}
+
+export interface CleanupLogsRequest {
+  days: number;
+}
+
+// 系统相关类型
+export interface OperationLog {
+  id: number;
+  user_id: number;
+  operation_type: string;
+  description: string;
+  target_type: string;
+  target_id: number;
+  ip_address: string;
+  user_agent: string;
+  created_at: string;
+  user?: {
+    id: number;
+    username: string;
+  };
+}
+
+export interface SystemOverview {
+  total_users: number;
+  total_activities: number;
+  total_lottery_codes: number;
+  total_lottery_records: number;
+  recent_activities: number;
+  recent_lotteries: number;
+}
+
+export interface SystemHealth {
+  status: string;
+  timestamp: string;
+  database: string;
+  uptime: number;
+  memory: {
+    rss: number;
+    heapTotal: number;
+    heapUsed: number;
+    external: number;
+  };
+  version: string;
+}
+
+export interface LotteryStatistics {
+  total_lottery_codes: number;
+  total_lottery_records: number;
+  total_winners: number;
+  win_rate: string;
+  prize_statistics: Array<{
+    id: number;
+    name: string;
+    total_quantity: number;
+    remaining_quantity: number;
+    awarded_count: number;
+    award_rate: string;
+  }>;
+}
+
+export interface WebhookInfo {
+  webhook_url: string;
+  webhook_token: string;
+  activity_id: string;
+}
+
+export interface OperationLogListParams {
+  page?: number;
+  limit?: number;
+  user_id?: number;
+  operation_type?: string;
+  target_type?: string;
+  start_date?: string;
+  end_date?: string;
+}
+
+// 响应数据类型
+export interface UserListResponse {
+  users: User[];
+  pagination: Pagination;
+}
+
+export interface ActivityListResponse {
+  activities: Activity[];
+  pagination: Pagination;
+}
+
+export interface LotteryCodeListResponse {
+  lottery_codes: LotteryCode[];
+  pagination: Pagination;
+}
+
+export interface LotteryRecordListResponse {
+  records: LotteryRecord[];
+  pagination: Pagination;
+}
+
+export interface OperationLogListResponse {
+  logs: OperationLog[];
+  pagination: Pagination;
+}
+
+export interface DrawLotteryResponse {
+  is_winner: boolean;
+  prize?: Prize;
+  lottery_record: {
+    id: number;
+    created_at: string;
+  };
+  lottery_code: LotteryCode;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
 }
 
 // i18n 相关类型

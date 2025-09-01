@@ -59,11 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  BadgeCheck,
-  ChevronsUpDown,
-  LogOut,
-} from 'lucide-vue-next';
+import { BadgeCheck, ChevronsUpDown, LogOut } from 'lucide-vue-next';
 import { useUserStore } from '@/stores/user';
 import { toast } from 'vue-sonner';
 import { useRouter } from 'vue-router';
@@ -71,11 +67,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const userStore = useUserStore();
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '../ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -93,20 +85,20 @@ import {
 } from '../ui/sidebar';
 
 interface User {
-  name: string
-  email: string
-  avatar: string
+  name: string;
+  email: string;
+  avatar: string;
 }
 
 defineProps<{
-  user: User
+  user: User;
 }>();
 
 const { isMobile } = useSidebar();
 
 const handleLogout = () => {
-  userStore.clearToken();
-  toast.success('You\'ve been logged out');
+  userStore.logoutUser();
+  toast.success("You've been logged out");
   router.push({ name: 'Login' });
 };
 </script>
