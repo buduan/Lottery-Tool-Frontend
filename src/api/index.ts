@@ -21,6 +21,7 @@ import type {
   LotteryRecordListParams,
   SystemOverview,
   SystemHealth,
+  //   SystemSettings,
   LotteryStatistics,
   WebhookInfo,
   UpdateParticipantInfoRequest,
@@ -582,6 +583,20 @@ export async function getSystemHealth(): Promise<{ health: SystemHealth }> {
   return apiRequest<{ health: SystemHealth }>('GET', '/system/health');
 }
 
+// /**
+//  * 获取系统设置
+//  */
+// export async function getSystemSettings(): Promise<SystemSettings> {
+//   return apiRequest<SystemSettings>('GET', '/system/settings');
+// }
+
+// /**
+//  * 更新系统设置
+//  */
+// export async function updateSystemSettings(settings: Partial<SystemSettings>): Promise<SystemSettings> {
+//   return apiRequest<SystemSettings>('PUT', '/system/settings', settings);
+// }
+
 /**
  * 获取系统统计数据
  */
@@ -633,6 +648,8 @@ export const systemApi = {
   cleanupLogs: cleanupOperationLogs,
   getSystemOverview,
   getHealth: getSystemHealth,
+//   getSettings: getSystemSettings,
+//   updateSettings: updateSystemSettings,
 };
 
 // 活动管理相关 API

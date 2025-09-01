@@ -335,6 +335,19 @@ export interface LoginResponse {
   user: User;
 }
 
+// 系统设置相关类型
+export interface SystemSettings {
+  systemName: string;
+  version: string;
+  allowMultipleWins: boolean;
+  autoLottery: boolean;
+  maxParticipants: number;
+  emailNotification: boolean;
+  smsNotification: boolean;
+  sessionTimeout: number;
+  forcePasswordChange: boolean;
+}
+
 // i18n 相关类型
 export type Locale = 'en-US' | 'zh-CN';
 
