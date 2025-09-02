@@ -254,7 +254,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
-import { API } from '@/api/index';
+import { API } from '@/api';
 import PageTitle from '@/components/ui/text/pageTitle.vue';
 import { 
   AlertTriangle, 

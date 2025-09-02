@@ -11,7 +11,7 @@ import {
   SidebarFooter,
   SidebarRail,
 } from '../ui/sidebar';
-import { API } from '@/api/index';
+import { API } from '@/api';
 
 // 用户信息类型
 interface User {

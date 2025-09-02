@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router';
 import LoginForm from '@/components/auth/loginForm.vue';
-import { API, setAuthToken } from '@/api/index';
+import { API, setAuthToken } from '@/api';
 import { useUserStore } from '@/stores/user';
 import { toast } from 'vue-sonner';
 

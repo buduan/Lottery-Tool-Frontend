@@ -198,9 +198,9 @@ export interface LotteryRecordListParams extends PaginationParams {
   lottery_code?: string;
 }
 
-export interface ImportLotteryCodesRequest {
-  file: File;
-}
+// export interface ImportLotteryCodesRequest {
+//   file: File;
+// }
 
 export interface UpdateParticipantInfoRequest {
   participant_info: {
@@ -336,17 +336,17 @@ export interface LoginResponse {
 }
 
 // 系统设置相关类型
-export interface SystemSettings {
-  systemName: string;
-  version: string;
-  allowMultipleWins: boolean;
-  autoLottery: boolean;
-  maxParticipants: number;
-  emailNotification: boolean;
-  smsNotification: boolean;
-  sessionTimeout: number;
-  forcePasswordChange: boolean;
-}
+// export interface SystemSettings {
+//   systemName: string;
+//   version: string;
+//   allowMultipleWins: boolean;
+//   autoLottery: boolean;
+//   maxParticipants: number;
+//   emailNotification: boolean;
+//   smsNotification: boolean;
+//   sessionTimeout: number;
+//   forcePasswordChange: boolean;
+// }
 
 // i18n 相关类型
 export type Locale = 'en-US' | 'zh-CN';

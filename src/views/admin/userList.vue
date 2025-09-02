@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, h } from 'vue';
 import { useRouter } from 'vue-router';
-import { API } from '@/api/index';
+import { API } from '@/api';
 import type { User, UserListParams } from '@/types/api';
 import type { TableColumn } from '@/components/common/types';
 import PageTitle from '@/components/ui/text/pageTitle.vue';

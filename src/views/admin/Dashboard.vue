@@ -97,7 +97,7 @@ import NumberCard from '@/components/admin/dashboard/numberCard.vue';
 import ActivityCard from '@/components/admin/dashboard/ActivityCard.vue';
 import { Button } from '@/components/ui/button';
 import { Users, ShoppingCart, Package, Activity, Plus } from 'lucide-vue-next';
-import { API } from '@/api/index';
+import { API } from '@/api';
 import type { Activity as ActivityType } from '@/types/api';
 
 const router = useRouter();

@@ -169,7 +169,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { API } from '@/api/index';
+import { API } from '@/api';
 import type { Activity } from '@/types/api';
 import type { TableColumn } from '@/components/common/types';
 import PageTitle from '@/components/ui/text/pageTitle.vue';

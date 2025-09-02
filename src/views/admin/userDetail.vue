@@ -146,7 +146,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { API } from '@/api/index';
+import { API } from '@/api';
 import type { User } from '@/types/api';
 import PageTitle from '@/components/ui/text/pageTitle.vue';
 import { Button } from '@/components/ui/button';

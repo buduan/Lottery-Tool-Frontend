@@ -74,7 +74,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, Plus } from 'lucide-vue-next';
-import { API } from '@/api/index';
+import { API } from '@/api';
 import type { Activity } from '@/types/api';
 import type { TableColumn } from '@/components/common/types';
 
