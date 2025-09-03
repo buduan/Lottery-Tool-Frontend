@@ -32,6 +32,14 @@ const adminRoutes: RouteRecordRaw[] = [
             },
           },
           {
+            path: 'edit/:id',
+            name: 'Edit Activity',
+            component: () => import('../views/admin/activityEdit.vue'),
+            meta: {
+              title: 'Edit',
+            },
+          },
+          {
             path: 'detail/:id',
             name: 'Activity Detail',
             component: () => import('../views/admin/activityDetail.vue'),
@@ -42,7 +50,7 @@ const adminRoutes: RouteRecordRaw[] = [
           {
             path: 'create',
             name: 'Create',
-            component: () => import('../views/admin/activityDetail.vue'),
+            component: () => import('../views/admin/activityEdit.vue'),
             meta: {
               title: 'Create Activity',
             },
