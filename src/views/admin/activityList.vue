@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <PageTitle title="活动列表" />
+    <PageTitle title="Activities" />
     
     <!-- 筛选和搜索栏 -->
     <div class="flex items-center justify-between gap-4">
@@ -10,7 +10,7 @@
           <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
             v-model="searchQuery"
-            placeholder="搜索活动名称..."
+            placeholder="Search..."
             class="pl-10 w-64"
             @input="handleSearch"
           />
@@ -19,25 +19,25 @@
         <!-- 状态筛选 -->
         <Select v-model="statusFilter" @update:model-value="handleStatusFilter">
           <SelectTrigger class="w-32">
-            <SelectValue placeholder="状态" />
+            <SelectValue placeholder="States" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">全部状态</SelectItem>
-            <SelectItem value="draft">草稿</SelectItem>
-            <SelectItem value="active">进行中</SelectItem>
-            <SelectItem value="ended">已结束</SelectItem>
+            <SelectItem value="all">State</SelectItem>
+            <SelectItem value="draft">Draft</SelectItem>
+            <SelectItem value="active">Active</SelectItem>
+            <SelectItem value="ended">Ended</SelectItem>
           </SelectContent>
         </Select>
         
         <!-- 模式筛选 -->
         <Select v-model="modeFilter" @update:model-value="handleModeFilter">
           <SelectTrigger class="w-32">
-            <SelectValue placeholder="模式" />
+            <SelectValue placeholder="Mode" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">全部模式</SelectItem>
-            <SelectItem value="online">线上抽奖</SelectItem>
-            <SelectItem value="offline">线下抽奖</SelectItem>
+            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="online">Online</SelectItem>
+            <SelectItem value="offline">Offline</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -45,7 +45,7 @@
       <!-- 创建按钮 -->
       <Button @click="handleCreateActivity" class="whitespace-nowrap">
         <Plus class="h-4 w-4 mr-2" />
-        创建活动
+        Create
       </Button>
     </div>
     
@@ -60,7 +60,7 @@
         total: totalPages * 10
       }"
       @page-change="handlePageChange"
-      :empty-text="'暂无活动数据'"
+      :empty-text="'Null'"
     />
   </div>
 </template>
@@ -92,9 +92,9 @@ const modeFilter = ref('all');
 // 状态徽章配置
 const getStatusBadge = (status: string) => {
   const statusMap = {
-    draft: { label: '草稿', variant: 'secondary' as const },
-    active: { label: '进行中', variant: 'default' as const },
-    ended: { label: '已结束', variant: 'destructive' as const },
+    draft: { label: 'Draft', variant: 'secondary' as const },
+    active: { label: 'Active', variant: 'default' as const },
+    ended: { label: 'Ended', variant: 'destructive' as const },
   };
   return statusMap[status as keyof typeof statusMap] || { label: status, variant: 'secondary' as const };
 };
@@ -102,8 +102,8 @@ const getStatusBadge = (status: string) => {
 // 模式徽章配置
 const getModeBadge = (mode: string) => {
   const modeMap = {
-    online: { label: '线上抽奖', variant: 'default' as const },
-    offline: { label: '线下抽奖', variant: 'secondary' as const },
+    online: { label: 'Online', variant: 'default' as const },
+    offline: { label: 'Offline', variant: 'secondary' as const },
   };
   return modeMap[mode as keyof typeof modeMap] || { label: mode, variant: 'secondary' as const };
 };

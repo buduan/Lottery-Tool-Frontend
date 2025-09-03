@@ -66,6 +66,21 @@
             "type": "string",
             "format": "date-time",
             "description": "创建时间"
+          },
+          "lottery_codes_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "抽奖码总数量"
+          },
+          "remaining_lottery_codes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "剩余抽奖码数量"
+          },
+          "used_lottery_codes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "已使用抽奖码数量"
           }
         }
       },

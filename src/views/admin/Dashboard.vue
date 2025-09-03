@@ -140,35 +140,6 @@ const fetchActiveActivities = async () => {
     activeActivities.value = response.activities;
   } catch (error) {
     console.error('获取进行中活动失败:', error);
-    // 使用模拟数据作为后备
-    activeActivities.value = [
-      {
-        id: 1,
-        name: '春节抽奖活动',
-        description: '欢度春节，好礼相送！参与即有机会获得丰厚奖品。',
-        status: 'active' as const,
-        lottery_mode: 'online' as const,
-        start_time: '2024-01-20T10:00:00Z',
-        end_time: '2024-02-10T23:59:59Z',
-        created_at: '2024-01-15T09:00:00Z',
-        lottery_codes_count: 500,
-        remaining_lottery_codes: 320,
-        used_lottery_codes: 180,
-      },
-      {
-        id: 2,
-        name: '新用户专享抽奖',
-        description: '新用户注册即可参与，100%中奖率！',
-        status: 'active' as const,
-        lottery_mode: 'online' as const,
-        start_time: '2024-01-01T00:00:00Z',
-        end_time: '2024-12-31T23:59:59Z',
-        created_at: '2023-12-25T10:00:00Z',
-        lottery_codes_count: 1000,
-        remaining_lottery_codes: 750,
-        used_lottery_codes: 250,
-      },
-    ];
   }
 };
 
@@ -180,47 +151,7 @@ const fetchRecentActivities = async () => {
     });
     recentActivities.value = response.activities;
   } catch (error) {
-    console.error('获取最近活动失败:', error);
-    // 使用模拟数据作为后备
-    recentActivities.value = [
-      {
-        id: 3,
-        name: '元宵节线下抽奖',
-        description: '线下门店活动，到店即可参与抽奖。',
-        status: 'draft' as const,
-        lottery_mode: 'offline' as const,
-        start_time: '2024-02-24T10:00:00Z',
-        end_time: '2024-02-24T20:00:00Z',
-        created_at: '2024-01-25T14:30:00Z',
-        lottery_codes_count: 200,
-        remaining_lottery_codes: 200,
-        used_lottery_codes: 0,
-      },
-      {
-        id: 4,
-        name: '会员积分兑换抽奖',
-        description: '使用积分兑换抽奖机会，奖品丰富。',
-        status: 'draft' as const,
-        lottery_mode: 'online' as const,
-        created_at: '2024-01-24T16:45:00Z',
-        lottery_codes_count: 0,
-        remaining_lottery_codes: 0,
-        used_lottery_codes: 0,
-      },
-      {
-        id: 5,
-        name: '周年庆典大抽奖',
-        description: '公司周年庆，超级大奖等你来拿！',
-        status: 'ended' as const,
-        lottery_mode: 'online' as const,
-        start_time: '2024-01-01T00:00:00Z',
-        end_time: '2024-01-07T23:59:59Z',
-        created_at: '2023-12-20T11:00:00Z',
-        lottery_codes_count: 2000,
-        remaining_lottery_codes: 0,
-        used_lottery_codes: 2000,
-      },
-    ];
+    console.log('获取最近活动失败:', error);    
   }
 };
 
