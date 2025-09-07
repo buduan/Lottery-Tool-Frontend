@@ -202,7 +202,7 @@ export const systemApi = {
   },
 
   // 创建用户
-  async createUser(data: CreateUserRequest): Promise<{ user: User }> {
+  async createUser(data: CreateUserRequest): Promise<User> {
     return apiFetch('/system/users', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -210,12 +210,12 @@ export const systemApi = {
   },
 
   // 获取用户详情
-  async getUser(id: number): Promise<{ user: User }> {
+  async getUser(id: number): Promise<User> {
     return apiFetch(`/system/users/${id}`);
   },
 
   // 更新用户信息
-  async updateUser(id: number, data: UpdateUserRequest): Promise<{ user: User }> {
+  async updateUser(id: number, data: UpdateUserRequest): Promise<User> {
     return apiFetch(`/system/users/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),

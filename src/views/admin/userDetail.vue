@@ -7,7 +7,7 @@
       <div class="text-gray-500">正在加载用户数据...</div>
     </div>
     
-    <form v-else @submit="onSubmit" class="space-y-6">
+    <form v-else @submit.prevent="onSubmit" class="space-y-6">
         <!-- 基本信息 -->
         <div class="space-y-4">
           <h3 class="text-lg font-medium text-gray-900">基本信息</h3>
@@ -191,24 +191,30 @@ const isEditMode = computed(() => !!route.params.id);
 const userId = computed(() => route.params.id ? Number(route.params.id) : null);
 
 // 表单验证规则
-const formSchema = toTypedSchema(z.object({
-  username: z.string().min(3, '用户名至少需要3个字符').max(50, '用户名不能超过50个字符'),
-  email: z.string().email('请输入有效的邮箱地址'),
-  password: z.string().min(6, '密码至少需要6位字符').optional(),
-  role: z.enum(['admin', 'super_admin'], {
-    message: '请选择用户角色',
-  }),
-  status: z.enum(['active', 'inactive']).optional(),
-}).refine((data) => {
-  // 创建模式下密码必填
-  if (!isEditMode.value && !data.password) {
-    return false;
+const formSchema = computed(() => {
+  const baseSchema = {
+    username: z.string().min(3, '用户名至少需要3个字符').max(50, '用户名不能超过50个字符'),
+    email: z.string().email('请输入有效的邮箱地址'),
+    role: z.enum(['admin', 'super_admin'], {
+      message: '请选择用户角色',
+    }),
+    status: z.enum(['active', 'inactive']).optional(),
+  };
+
+  // 创建模式下添加密码验证
+  if (!isEditMode.value) {
+    return toTypedSchema(z.object({
+      ...baseSchema,
+      password: z.string().min(6, '密码至少需要6位字符'),
+    }));
   }
-  return true;
-}, {
-  message: '创建用户时密码不能为空',
-  path: ['password'],
-}));
+
+  // 编辑模式下不验证密码
+  return toTypedSchema(z.object({
+    ...baseSchema,
+    password: z.string().optional(),
+  }));
+});
 
 // 表单实例
 const form = useForm({
@@ -248,8 +254,8 @@ const loadUser = async () => {
   
   try {
     const response = await systemApi.getUser(userId.value);
-    const user = response.user;
-    
+    const user = response;
+
     // 设置表单值
     form.setValues({
       username: user.username,
