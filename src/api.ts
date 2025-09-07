@@ -9,6 +9,8 @@ import type {
   LoginRequest,
   RegisterRequest,
   ChangePasswordRequest,
+  CreateUserRequest,
+  UpdateUserRequest,
   CreateActivityRequest,
   UpdateActivityRequest,
   DrawLotteryRequest,
@@ -197,6 +199,27 @@ export const systemApi = {
   async getUsers(params: UserListParams = {}): Promise<{ users: User[]; pagination: Pagination }> {
     const queryString = buildQueryParams(params as Record<string, string | number | boolean | undefined>);
     return apiFetch(`/system/users${queryString}`);
+  },
+
+  // 创建用户
+  async createUser(data: CreateUserRequest): Promise<{ user: User }> {
+    return apiFetch('/system/users', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  // 获取用户详情
+  async getUser(id: number): Promise<{ user: User }> {
+    return apiFetch(`/system/users/${id}`);
+  },
+
+  // 更新用户信息
+  async updateUser(id: number, data: UpdateUserRequest): Promise<{ user: User }> {
+    return apiFetch(`/system/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
   },
 
   // 更新用户状态
