@@ -6,6 +6,7 @@ export interface User {
   role: 'super_admin' | 'admin';
   status: 'active' | 'inactive';
   created_at: string;
+  updated_at: string;
 }
 
 export interface Activity {
@@ -97,6 +98,20 @@ export interface RegisterRequest {
 export interface ChangePasswordRequest {
   old_password: string;
   new_password: string;
+}
+
+export interface CreateUserRequest {
+  username: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'super_admin';
+}
+
+export interface UpdateUserRequest {
+  username?: string;
+  email?: string;
+  role?: 'admin' | 'super_admin';
+  status?: 'active' | 'inactive';
 }
 
 export interface CreateActivityRequest {
