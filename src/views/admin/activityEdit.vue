@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6" :class="{ 'pb-20': !isAtBottom }">
     <PageTitle title="Create Activity" />
     
     <form @submit="onSubmit" class="space-y-6">
@@ -9,7 +9,7 @@
           
           <FormField v-slot="{ componentField }" name="name">
             <FormItem>
-              <FormLabel>活动名称 *</FormLabel>
+              <FormLabel>活动名称</FormLabel>
               <FormControl>
                 <Input 
                   type="text" 
@@ -17,10 +17,10 @@
                   v-bind="componentField" 
                 />
               </FormControl>
+              <FormMessage />
               <FormDescription>
                 活动名称将显示在抽奖页面上
               </FormDescription>
-              <FormMessage />
             </FormItem>
           </FormField>
 
@@ -45,15 +45,16 @@
             <FormItem>
               <FormLabel>抽奖模式 *</FormLabel>
               <FormControl>
-                <Select v-bind="componentField">
-                  <SelectTrigger>
-                    <SelectValue placeholder="请选择抽奖模式" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="online">线上抽奖</SelectItem>
-                    <SelectItem value="offline">线下抽奖</SelectItem>
-                  </SelectContent>
-                </Select>
+                <RadioGroup v-bind="componentField" class="mt-2 flex flex-col space-y-1 md:flex-row md:space-y-0 md:space-x-6">
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="offline" value="offline" />
+                    <Label for="offline">线下抽奖</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="online" value="online" />
+                    <Label for="online">线上抽奖</Label>
+                  </div>
+                </RadioGroup>
               </FormControl>
               <FormDescription>
                 线上抽奖：用户自行输入抽奖码参与；线下抽奖：管理员操作抽奖
@@ -128,18 +129,28 @@
             <FormItem>
               <FormLabel>抽奖码格式</FormLabel>
               <FormControl>
-                <Select v-bind="componentField">
-                  <SelectTrigger>
-                    <SelectValue placeholder="请选择抽奖码格式" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="4_digit_number">4位数字</SelectItem>
-                    <SelectItem value="8_digit_number">8位数字</SelectItem>
-                    <SelectItem value="8_digit_alphanumeric">8位字母数字</SelectItem>
-                    <SelectItem value="12_digit_number">12位数字</SelectItem>
-                    <SelectItem value="12_digit_alphanumeric">12位字母数字</SelectItem>
-                  </SelectContent>
-                </Select>
+                <RadioGroup v-bind="componentField" class="mt-2 flex flex-col space-y-1 md:flex-row md:flex-wrap md:space-y-0 md:gap-x-6 md:gap-y-2">
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="4_digit_number" value="4_digit_number" />
+                    <Label for="4_digit_number">4位数字</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="8_digit_number" value="8_digit_number" />
+                    <Label for="8_digit_number">8位数字</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="8_digit_alphanumeric" value="8_digit_alphanumeric" />
+                    <Label for="8_digit_alphanumeric">8位字母数字</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="12_digit_number" value="12_digit_number" />
+                    <Label for="12_digit_number">12位数字</Label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <RadioGroupItem id="12_digit_alphanumeric" value="12_digit_alphanumeric" />
+                    <Label for="12_digit_alphanumeric">12位字母数字</Label>
+                  </div>
+                </RadioGroup>
               </FormControl>
               <FormDescription>
                 选择抽奖码的生成格式
@@ -147,12 +158,15 @@
               <FormMessage />
             </FormItem>
           </FormField>
-
-
         </div>
 
         <!-- 提交按钮 -->
-        <div class="flex justify-end space-x-4 pt-6 border-t">
+        <div 
+          :class="[
+            'flex space-x-4 transition-all duration-300',
+             isAtBottom ? 'justify-start py-3 border-t static' : 'justify-start fixed bottom-0 z-10 -mx-4 px-4 py-3 w-full bg-white/80 backdrop-blur-lg border-t-1'
+          ]"
+        >
           <Button 
             type="button" 
             variant="outline" 
@@ -178,6 +192,7 @@ import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
 import { toast } from 'sonner';
+import { useScroll } from '@vueuse/core';
 
 import PageTitle from '@/components/ui/text/pageTitle.vue';
 import { Button } from '@/components/ui/button';
@@ -190,16 +205,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 import { adminActivityApi } from '@/api';
-import type { Activity, CreateActivityRequest, UpdateActivityRequest } from '@/types/api';
+import type { CreateActivityRequest, UpdateActivityRequest } from '@/types/api';
 
 const route = useRoute();
 const router = useRouter();
@@ -213,7 +223,7 @@ const formSchema = toTypedSchema(z.object({
   name: z.string().min(1, '活动名称不能为空').max(100, '活动名称不能超过100个字符'),
   description: z.string().max(1000, '活动描述不能超过1000个字符').optional(),
   lottery_mode: z.enum(['offline', 'online'], {
-    required_error: '请选择抽奖模式',
+    message: '请选择抽奖模式',
   }),
   start_time: z.string().optional(),
   end_time: z.string().optional(),
@@ -224,7 +234,7 @@ const formSchema = toTypedSchema(z.object({
       '8_digit_number', 
       '8_digit_alphanumeric',
       '12_digit_number',
-      '12_digit_alphanumeric'
+      '12_digit_alphanumeric',
     ]).optional(),
 
   }).optional(),
@@ -244,12 +254,12 @@ const form = useForm({
   initialValues: {
     name: '',
     description: '',
-    lottery_mode: '',
+    lottery_mode: 'offline',
     start_time: '',
     end_time: '',
     settings: {
       max_lottery_codes: undefined,
-      lottery_code_format: '',
+      lottery_code_format: '4_digit_number',
 
     },
   },
@@ -257,6 +267,15 @@ const form = useForm({
 
 // 提交状态
 const isSubmitting = ref(false);
+
+// 滚动监听
+const { y } = useScroll(window);
+const isAtBottom = computed(() => {
+  const scrollHeight = document.documentElement.scrollHeight;
+  const clientHeight = document.documentElement.clientHeight;
+  const scrollTop = y.value;
+  return scrollTop + clientHeight >= scrollHeight - 10; // 10px容差
+});
 
 // 加载活动数据（编辑模式）
 const loadActivity = async () => {
@@ -280,7 +299,7 @@ const loadActivity = async () => {
       end_time: formatDateTime(activity.end_time),
       settings: {
         max_lottery_codes: activity.settings?.max_lottery_codes,
-        lottery_code_format: activity.settings?.lottery_code_format || '',
+        lottery_code_format: activity.settings?.lottery_code_format || '4_digit_number',
 
       },
     });
