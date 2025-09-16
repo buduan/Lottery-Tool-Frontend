@@ -12,3 +12,6 @@ vite-env.d.ts
 vite.config.ts
 tailwind.config.js
 components.json
+
+# 忽略 UI 组件目录
+src/components/ui/
