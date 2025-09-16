@@ -162,3 +162,5 @@ firebase-debug.log
 
 # Sentry
 .sentryclirc
+
+*.js

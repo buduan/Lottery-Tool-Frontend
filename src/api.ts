@@ -313,9 +313,9 @@ export const adminActivityApi = {
   },
 
   // 获取活动的抽奖记录
-  async getLotteryRecords(id: number, params: LotteryRecordListParams = {}): Promise<{ lottery_records: LotteryRecord[]; pagination: Pagination }> {
+  async getLotteryRecords(id: number, params: LotteryRecordListParams = {}): Promise<{ records: LotteryRecord[]; pagination: Pagination }> {
     const queryString = buildQueryParams(params as Record<string, string | number | boolean | undefined>);
-    return apiFetch(`/admin/activities/${id}/lottery-records${queryString}`);
+    return apiFetch(`/admin/activities/${id}/records${queryString}`);
   },
 
   // 导出抽奖记录
@@ -380,14 +380,35 @@ export const adminPrizeApi = {
 
 // 统计模块 API
 export const statsApi = {
-  // 获取系统统计信息
+  // 获取仪表盘统计信息
+  async getDashboardStats(): Promise<{
+    totalActivities?: number;
+    totalLotteryCodes?: number;
+    totalAdmins?: number;
+    totalLotteryRecords?: number;
+    userActivities?: number;
+    userLotteryCodes?: number;
+    userLotteryRecords?: number;
+    totalUsers?: number;
+  }> {
+    return apiFetch('/dashboard');
+  },
+
+  // 获取系统统计信息（已废弃，使用getDashboardStats代替）
   async getSystemStats(): Promise<{
     total_users: number;
     total_activities: number;
     total_lottery_codes: number;
     total_lottery_records: number;
   }> {
-    return apiFetch('/admin/stats/system');
+    // 为了向后兼容，调用新的dashboard接口并映射数据
+    const dashboardData = await this.getDashboardStats();
+    return {
+      total_users: dashboardData.totalUsers || dashboardData.totalAdmins || 0,
+      total_activities: dashboardData.totalActivities || dashboardData.userActivities || 0,
+      total_lottery_codes: dashboardData.totalLotteryCodes || dashboardData.userLotteryCodes || 0,
+      total_lottery_records: dashboardData.totalLotteryRecords || dashboardData.userLotteryRecords || 0,
+    };
   },
 
   // 获取活动统计信息
