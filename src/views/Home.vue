@@ -175,19 +175,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ref } from 'vue';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 // 响应式数据
-const showParticipateForm = ref(false)
-const participantName = ref('')
+const showParticipateForm = ref(false);
+const participantName = ref('');
 </script>
 
 <style scoped>
 .hero {
-  min-height: 60vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }

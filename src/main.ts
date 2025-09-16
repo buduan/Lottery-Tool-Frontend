@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createPersistedState } from 'pinia-plugin-persistedstate';
+import { Toaster } from 'vue-sonner';
 import App from './App.vue';
 import router from './router';
 import './index.css';
@@ -22,5 +23,6 @@ router.beforeEach((to, from, next) => {
 pinia.use(createPersistedState());
 app.use(pinia);
 app.use(router);
+app.component('Toaster', Toaster);
 app.mount('#app');
 

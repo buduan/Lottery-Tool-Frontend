@@ -285,7 +285,7 @@ const handleDeleteActivity = async (id: string) => {
       alert('删除失败，请稍后重试');
     }
   }
-}
+};
 
 
 

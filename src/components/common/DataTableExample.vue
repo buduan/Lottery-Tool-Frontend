@@ -49,9 +49,9 @@ const columns = [
     width: '100px',
     align: 'center' as const,
     render: (value: unknown) => {
-      const statusValue = String(value)
-      const statusClass = statusValue === '活跃' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-      return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">${statusValue}</span>`
+      const statusValue = String(value);
+      const statusClass = statusValue === '活跃' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+      return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">${statusValue}</span>`;
     },
   },
   {
@@ -63,7 +63,7 @@ const columns = [
       return `<div class="flex gap-2 justify-center">
         <button class="text-blue-600 hover:text-blue-800 text-sm">编辑</button>
         <button class="text-red-600 hover:text-red-800 text-sm">删除</button>
-      </div>`
+      </div>`;
     },
   },
 ];

@@ -335,9 +335,10 @@ export const adminActivityApi = {
   },
 
   // 线下抽奖
-  async offlineDraw(id: number): Promise<{ lottery_record: LotteryRecord }> {
-    return apiFetch(`/admin/activities/${id}/offline-draw`, {
+  async offlineDraw(id: number, data: { lottery_code: string; prize_id?: number }): Promise<{ is_winner: boolean; prize?: any; lottery_record: any; lottery_code: any }> {
+    return apiFetch(`/lottery/activities/${id}/offline-draw`, {
       method: 'POST',
+      body: JSON.stringify(data),
     });
   },
 };

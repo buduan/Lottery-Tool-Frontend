@@ -21,6 +21,14 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/lottery',
+    name: 'Lottery',
+    component: () => import('../views/lottery.vue'),
+    meta: {
+      title: '抽奖',
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/auth/login.vue'),
