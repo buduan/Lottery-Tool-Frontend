@@ -13,6 +13,7 @@ export interface Activity {
   id: number;
   name: string;
   description?: string;
+  icon?: string;
   status: 'draft' | 'active' | 'ended';
   lottery_mode: 'offline' | 'online';
   start_time?: string;
@@ -66,8 +67,9 @@ export interface LotteryRecord {
   phone?: string;
   email?: string;
   name?: string;
-  prize?: string;
+  prize?: string | Prize;
   operator?: string;
+  lottery_code?: LotteryCode;
 }
 
 export interface Pagination {
@@ -218,6 +220,14 @@ export interface LotteryRecordListParams extends PaginationParams {
   start_date?: string;
   end_date?: string;
   keyword?: string;
+}
+
+// 抽奖响应类型
+export interface DrawLotteryResponse {
+  is_winner: boolean;
+  prize?: Prize;
+  lottery_record: LotteryRecord;
+  lottery_code: LotteryCode;
 }
 
 // i18n 相关类型

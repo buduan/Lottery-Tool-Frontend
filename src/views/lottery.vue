@@ -102,7 +102,7 @@
     </div>
 
     <!-- 抽奖结果Dialog -->
-    <Dialog v-model:open="showResult">
+    <Dialog :open="showResult" @update:open="(open) => showResult = open">
       <DialogContent class="max-w-lg mx-4 rounded-2xl border-0 shadow-2xl">
         <DialogHeader class="pb-6">
           <DialogTitle class="text-center space-y-4">
@@ -187,7 +187,15 @@ const prizes = ref<Prize[]>([]);
 const lotteryCode = ref<string>('');
 const isDrawing = ref(false);
 const showResult = ref(false);
-const lotteryResult = ref<LotteryRecord | null>(null);
+const lotteryResult = ref<{
+  is_winner: boolean;
+  prize?: Prize | null;
+  lottery_record?: LotteryRecord | null;
+  lottery_code?: { 
+    code: string; 
+    participant_info?: { name: string; phone: string; email?: string } 
+  } | null;
+} | null>(null);
 
 // 参与者信息（仅online模式需要）
 const participantInfo = ref({
@@ -270,19 +278,22 @@ const loadActivityInfo = async () => {
       return;
     }
     
-  } catch (err: any) {
-    console.error('加载活动信息失败:', err);
+  } catch (err) {
+    // 加载活动信息失败
     
     // 解析API返回的错误信息
     let errorMessage = '获取活动信息失败，请稍后重试';
-    if (err?.response?.data?.error) {
-      const apiError = err.response.data.error;
-      errorMessage = apiError.message || errorMessage;
-      if (apiError.details) {
-        errorMessage += ` (${apiError.details})`;
+    if (err && typeof err === 'object' && 'response' in err) {
+      const response = (err as { response?: { data?: { error?: { message?: string; details?: string } } } }).response;
+      if (response?.data?.error) {
+        const apiError = response.data.error;
+        errorMessage = apiError.message || errorMessage;
+        if (apiError.details) {
+          errorMessage += ` (${apiError.details})`;
+        }
       }
-    } else if (err?.message) {
-      errorMessage = err.message;
+    } else if (err && typeof err === 'object' && 'message' in err) {
+      errorMessage = (err as { message: string }).message;
     }
     
     error.value = errorMessage;
@@ -337,10 +348,10 @@ const handleDraw = async () => {
     
     // 统一处理抽奖结果
     lotteryResult.value = {
-      is_winner: drawResponse.data?.is_winner || false,
-      prize: drawResponse.data?.prize || null,
-      lottery_record: drawResponse.data?.lottery_record || null,
-      lottery_code: drawResponse.data?.lottery_code || null,
+      is_winner: drawResponse.is_winner || false,
+      prize: drawResponse.prize || null,
+      lottery_record: drawResponse.lottery_record || null,
+      lottery_code: drawResponse.lottery_code || null,
     };
     
     showResult.value = true;
@@ -365,19 +376,22 @@ const handleDraw = async () => {
       participantInfo.value = { name: '', phone: '', email: '' };
     }
     
-  } catch (err: any) {
-    console.error('抽奖失败:', err);
+  } catch (err) {
+    // 抽奖失败
     
     // 解析API返回的错误信息
     let errorMessage = '抽奖失败，请稍后重试';
-    if (err?.response?.data?.error) {
-      const apiError = err.response.data.error;
-      errorMessage = apiError.message || errorMessage;
-      if (apiError.details) {
-        errorMessage += ` (${apiError.details})`;
+    if (err && typeof err === 'object' && 'response' in err) {
+      const response = (err as { response?: { data?: { error?: { message?: string; details?: string } } } }).response;
+      if (response?.data?.error) {
+        const apiError = response.data.error;
+        errorMessage = apiError.message || errorMessage;
+        if (apiError.details) {
+          errorMessage += ` (${apiError.details})`;
+        }
       }
-    } else if (err?.message) {
-      errorMessage = err.message;
+    } else if (err && typeof err === 'object' && 'message' in err) {
+      errorMessage = (err as { message: string }).message;
     }
     
     toast.error(errorMessage);
