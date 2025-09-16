@@ -19,7 +19,7 @@ import type { Component } from 'vue';
 
 defineProps<{
   title: string
-  value: number
+  value: number | string
   icon: Component | string
 }>();
 </script>

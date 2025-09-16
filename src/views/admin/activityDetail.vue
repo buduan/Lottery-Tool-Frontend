@@ -6,16 +6,21 @@
     />
     
     <!-- 概览数值卡片 -->
-    <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
       <NumberCard 
-        title="剩余奖品数" 
-        :value="remainingPrizes" 
-        :icon="Package" 
+        title="奖品种数" 
+        :value="prizeTypeCount" 
+        :icon="Gift" 
       />
       <NumberCard 
-        title="奖品总数" 
-        :value="totalPrizes" 
-        :icon="Gift" 
+        title="抽奖码数" 
+        :value="totalLotteryCodes" 
+        :icon="Ticket" 
+      />
+      <NumberCard 
+        title="剩余奖品数 / 奖品总数" 
+        :value="`${remainingPrizes} / ${totalPrizes}`" 
+        :icon="Package" 
       />
     </div>
     
@@ -25,17 +30,25 @@
         <h3 class="scroll-m-20 text-xl font-semibold tracking-tight">
           抽奖记录
         </h3>
-        <div class="flex items-center gap-4">
-          <!-- 搜索框 -->
+      </div>
+      
+      <!-- 搜索和筛选区域 -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
           <div class="relative">
             <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
               v-model="searchQuery"
               placeholder="搜索抽奖码、姓名..."
-              class="pl-10 w-64"
+              class="pl-10 w-full"
               @input="handleSearch"
             />
           </div>
+        </div>
+        <div class="flex gap-2">
+          <Button variant="outline">
+            管理奖品
+          </Button>
         </div>
       </div>
       
@@ -64,7 +77,8 @@ import PageTitle from '@/components/ui/text/pageTitle.vue';
 import NumberCard from '@/components/admin/dashboard/numberCard.vue';
 import DataTable from '@/components/common/DataTable.vue';
 import { Input } from '@/components/ui/input';
-import { Package, Gift, Search } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button';
+import { Package, Gift, Search, Ticket } from 'lucide-vue-next';
 import { API } from '@/api';
 import type { Activity, Prize, LotteryRecord } from '@/types/api';
 import type { TableColumn } from '@/components/common/types';
@@ -83,6 +97,14 @@ const totalRecords = ref(0);
 const searchQuery = ref('');
 
 // 计算属性
+const prizeTypeCount = computed(() => {
+  return prizes.value.length;
+});
+
+const totalLotteryCodes = computed(() => {
+  return activity.value?.lottery_codes_count || 0;
+});
+
 const totalPrizes = computed(() => {
   return prizes.value.reduce((sum, prize) => sum + prize.total_quantity, 0);
 });
