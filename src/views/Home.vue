@@ -142,12 +142,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <!-- 其他服务 -->
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">其他服务</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">不断同学</h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">在线投票</a></li>
-              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">问卷调查</a></li>
-              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">活动管理</a></li>
-              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">数据分析</a></li>
+              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">主页</a></li>
+              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">抽奖工具</a></li>
+              <li><a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">实验室</a></li>
             </ul>
           </div>
           
@@ -166,7 +165,7 @@
         <!-- ICP备案号 -->
         <div class="border-t border-gray-200 pt-8 text-center">
           <p class="text-gray-500 text-sm">
-            © 2024 智能抽奖工具. All rights reserved. | 
+            © 2025 不断同学创意网络科技工作室. MIT Licence. | 
             <a href="#" class="hover:text-blue-600 transition-colors">ICP备案号：京ICP备XXXXXXXX号</a>
           </p>
         </div>
