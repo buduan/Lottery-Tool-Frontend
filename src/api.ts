@@ -23,6 +23,7 @@ import type {
   LotteryCodeListParams,
   LotteryRecordListParams,
   Pagination,
+  DrawLotteryResponse,
 } from './types/api';
 
 // API 基础配置
@@ -185,7 +186,7 @@ export const lotteryApi = {
   },
 
   // 用户使用抽奖码参与线上抽奖
-  async draw(id: number, data: DrawLotteryRequest): Promise<{ lottery_record: LotteryRecord }> {
+  async draw(id: number, data: DrawLotteryRequest): Promise<DrawLotteryResponse> {
     return apiFetch(`/lottery/activities/${id}/draw`, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -335,7 +336,7 @@ export const adminActivityApi = {
   },
 
   // 线下抽奖
-  async offlineDraw(id: number, data: { lottery_code: string; prize_id?: number }): Promise<{ is_winner: boolean; prize?: any; lottery_record: any; lottery_code: any }> {
+  async offlineDraw(id: number, data: { lottery_code: string; prize_id?: number }): Promise<DrawLotteryResponse> {
     return apiFetch(`/lottery/activities/${id}/offline-draw`, {
       method: 'POST',
       body: JSON.stringify(data),
