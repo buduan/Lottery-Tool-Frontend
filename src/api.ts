@@ -313,9 +313,9 @@ export const adminActivityApi = {
   },
 
   // 获取活动的抽奖记录
-  async getLotteryRecords(id: number, params: LotteryRecordListParams = {}): Promise<{ lottery_records: LotteryRecord[]; pagination: Pagination }> {
+  async getLotteryRecords(id: number, params: LotteryRecordListParams = {}): Promise<{ records: LotteryRecord[]; pagination: Pagination }> {
     const queryString = buildQueryParams(params as Record<string, string | number | boolean | undefined>);
-    return apiFetch(`/admin/activities/${id}/lottery-records${queryString}`);
+    return apiFetch(`/admin/activities/${id}/records${queryString}`);
   },
 
   // 导出抽奖记录

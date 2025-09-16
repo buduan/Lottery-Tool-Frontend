@@ -54,10 +54,20 @@ export interface LotteryCode {
 
 export interface LotteryRecord {
   id: number;
+  activity_id: number;
+  lottery_code_id: number;
+  prize_id?: number;
   is_winner: boolean;
+  operator_id?: number;
+  ip_address?: string;
+  user_agent?: string;
   created_at: string;
-  lottery_code: LotteryCode;
-  prize?: Prize;
+  lotteryCode: string;
+  phone?: string;
+  email?: string;
+  name?: string;
+  prize?: string;
+  operator?: string;
 }
 
 export interface Pagination {
@@ -207,6 +217,7 @@ export interface LotteryRecordListParams extends PaginationParams {
   is_winner?: boolean;
   start_date?: string;
   end_date?: string;
+  keyword?: string;
 }
 
 // i18n 相关类型
