@@ -5,10 +5,10 @@
   />
   <!-- 顶部数据卡片 -->
   <div class="grid md:grid-cols-4 grid-cols-2 gap-4 py-4">
-    <NumberCard title="Activities" :value="dashboardStats.total_activities" :icon="Users" />
-    <NumberCard title="Lottery Codes" :value="dashboardStats.total_lottery_codes" :icon="ShoppingCart" />
-    <NumberCard title="Users" :value="dashboardStats.total_users" :icon="Users" />
-    <NumberCard title="Records" :value="dashboardStats.total_lottery_records" :icon="Package" />
+    <NumberCard :title="cardLabels.activities" :value="dashboardStats.total_activities" :icon="Users" />
+    <NumberCard :title="cardLabels.lotteryCodes" :value="dashboardStats.total_lottery_codes" :icon="ShoppingCart" />
+    <NumberCard :title="cardLabels.users" :value="dashboardStats.total_users" :icon="Users" />
+    <NumberCard :title="cardLabels.records" :value="dashboardStats.total_lottery_records" :icon="Package" />
   </div>
   
   <!-- 活动列表 -->
@@ -90,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import PageTitle from '@/components/ui/text/pageTitle.vue';
 import NumberCard from '@/components/admin/dashboard/numberCard.vue';
@@ -106,6 +106,7 @@ const router = useRouter();
 const loading = ref(false);
 const activeActivities = ref<ActivityType[]>([]);
 const recentActivities = ref<ActivityType[]>([]);
+const isSupperAdmin = ref(false);
 const dashboardStats = ref({
   total_users: 0,
   total_activities: 0,
@@ -113,19 +114,56 @@ const dashboardStats = ref({
   total_lottery_records: 0,
 });
 
+// 数字卡片标签，根据用户角色显示不同内容
+const cardLabels = computed(() => {
+  if (isSupperAdmin.value) {
+    return {
+      activities: '总活动数',
+      lotteryCodes: '总抽奖码数',
+      users: '管理员数',
+      records: '抽奖记录数',
+    };
+  } else {
+    return {
+      activities: '我的活动',
+      lotteryCodes: '我的抽奖码',
+      users: '总用户数',
+      records: '我的记录',
+    };
+  }
+});
+
 // 获取仪表板统计数据
 const fetchDashboardStats = async () => {
   try {
-    const stats = await API.stats.getSystemStats();
-    dashboardStats.value = stats;
-  } catch (error) {
-    console.error('获取统计数据失败:', error);
-    // 使用模拟数据作为后备
+    const data = await API.stats.getDashboardStats();
+    
+    // 根据返回的数据字段判断用户角色
+    if (data.totalActivities !== undefined) {
+      // 超级管理员数据
+      isSupperAdmin.value = true;
+      dashboardStats.value = {
+        total_users: data.totalAdmins || 0,
+        total_activities: data.totalActivities || 0,
+        total_lottery_codes: data.totalLotteryCodes || 0,
+        total_lottery_records: data.totalLotteryRecords || 0,
+      };
+    } else {
+      // 管理员数据
+      isSupperAdmin.value = false;
+      dashboardStats.value = {
+        total_users: data.totalUsers || 0,
+        total_activities: data.userActivities || 0,
+        total_lottery_codes: data.userLotteryCodes || 0,
+        total_lottery_records: data.userLotteryRecords || 0,
+      };
+    }
+  } catch {
     dashboardStats.value = {
-      total_users: 156,
-      total_activities: 23,
-      total_lottery_codes: 1250,
-      total_lottery_records: 892,
+      total_users: 0,
+      total_activities: 0,
+      total_lottery_codes: 0,
+      total_lottery_records: 0,
     };
   }
 };
@@ -138,8 +176,9 @@ const fetchActiveActivities = async () => {
       limit: 5,
     });
     activeActivities.value = response.activities;
-  } catch (error) {
-    console.error('获取进行中活动失败:', error);
+  } catch {
+    // 获取进行中活动失败，设置为空数组
+    activeActivities.value = [];
   }
 };
 
@@ -150,8 +189,9 @@ const fetchRecentActivities = async () => {
       limit: 5,
     });
     recentActivities.value = response.activities;
-  } catch (error) {
-    console.log('获取最近活动失败:', error);    
+  } catch {
+    // 获取最近活动失败，设置为空数组
+    recentActivities.value = [];
   }
 };
 
