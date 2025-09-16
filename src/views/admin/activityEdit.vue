@@ -191,7 +191,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
-import { toast } from 'sonner';
+import { toast } from 'vue-sonner';
 import { useScroll } from '@vueuse/core';
 
 import PageTitle from '@/components/ui/text/pageTitle.vue';

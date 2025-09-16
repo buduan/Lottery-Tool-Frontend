@@ -33,7 +33,7 @@ const handleLogin = async (values: { username: string; password: string }) => {
       await router.replace({ name: 'Dashboard' });
     }
   } catch (err) {
-    toast.error('登录失败，请检查用户名或密码', err);
+    toast.error(typeof err === 'string' ? err : (err instanceof Error ? err.message : '登录失败，请检查用户名或密码'));
   }
 };
 </script>
