@@ -12,7 +12,7 @@
         
         <!-- 按钮区域 -->
         <div v-if="!showParticipateForm" class="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" class="px-8 py-3 text-lg">
+          <Button size="lg" class="px-8 py-3 text-lg" @click="goToAdmin">
             进入使用
           </Button>
           <Button 
@@ -29,11 +29,11 @@
         <div v-else class="max-w-md mx-auto">
           <div class="flex flex-col sm:flex-row gap-4">
             <Input 
-              v-model="participantName" 
+              v-model="activityId" 
               placeholder="请输入主办方提供的活动id进入" 
               class="flex-1 bg-white"
             />
-            <Button>
+            <Button @click="participateActivity">
               参与活动
             </Button>
           </div>
@@ -176,18 +176,37 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+// 路由实例
+const router = useRouter();
+
 // 响应式数据
 const showParticipateForm = ref(false);
-const participantName = ref('');
+const activityId = ref('');
+
+// 跳转到管理页面
+const goToAdmin = () => {
+  router.push('/admin');
+};
+
+// 参与活动
+const participateActivity = () => {
+  if (activityId.value.trim()) {
+    router.push({
+      path: '/lottery',
+      query: { activityId: activityId.value.trim() },
+    });
+  }
+};
 </script>
 
 <style scoped>
 .hero {
-  min-height: 100vh;
+  min-height: 0vh;
   display: flex;
   align-items: center;
 }
