@@ -169,13 +169,17 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Gift, Delete } from 'lucide-vue-next';
 import { toast, Toaster } from 'vue-sonner';
-import { lotteryApi, adminActivityApi } from '@/api';
+import { lotteryApi, adminActivityApi, authApi } from '@/api';
+import { useUserStore } from '@/stores/user';
 import type { Activity, Prize, LotteryRecord } from '@/types/api';
 
+const router = useRouter();
+const userStore = useUserStore();
 const urlParams = new URLSearchParams(window.location.search);
 const activityId = Number(urlParams.get('activityId'));
 
@@ -256,6 +260,32 @@ const deleteNumber = () => {
   lotteryCode.value = lotteryCode.value.slice(0, -1);
 };
 
+// 检查用户是否已登录（仅offline模式需要）
+const checkAuthForOffline = async (): Promise<boolean> => {
+  if (activityInfo.value?.lottery_mode !== 'offline') {
+    return true; // online模式不需要登录
+  }
+  
+  // 检查是否有token
+  if (!userStore.token) {
+    toast.error('线下活动需管理员登录');
+    router.push('/login');
+    return false;
+  }
+  
+  // 验证token是否有效
+  try {
+    await authApi.me();
+    return true;
+  } catch {
+    // token无效，清除并跳转登录
+    userStore.clearToken();
+    toast.error('线下活动需管理员登录');
+    router.push('/login');
+    return false;
+  }
+};
+
 // 加载活动信息
 const loadActivityInfo = async () => {
   if (!activityId) {
@@ -322,6 +352,12 @@ const handleDraw = async () => {
       toast.error('请输入手机号');
       return;
     }
+  }
+  
+  // 检查offline模式下的登录状态
+  const isAuthorized = await checkAuthForOffline();
+  if (!isAuthorized) {
+    return;
   }
   
   try {
